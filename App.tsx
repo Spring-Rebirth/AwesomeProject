@@ -2,10 +2,10 @@ import './global.css';
 import * as React from 'react';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './src/screens/HomeScreen';
 import AuthScreen from './src/screens/AuthScreen';
 import { useIsSignedIn, useIsSignedOut, useAuthState } from './src/hooks/auth';
 import SplashScreen from './src/screens/SplashScreen';
+import RootBottomTabs from './src/navigation/RootBottomTabs';
 
 export default function App() {
   const { loading } = useAuthState();
@@ -17,9 +17,9 @@ export default function App() {
 
   const RootStack = createNativeStackNavigator({
     screens: {
-      Home: {
+      RootBottomTabs: {
         if: useIsSignedIn,
-        screen: HomeScreen,
+        screen: RootBottomTabs,
       },
       Auth: {
         if: useIsSignedOut,

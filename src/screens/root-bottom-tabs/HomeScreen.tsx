@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../../lib/supabase';
 
 function HomeScreen() {
   const handleLogout = async () => {
