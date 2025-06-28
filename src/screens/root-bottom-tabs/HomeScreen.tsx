@@ -1,74 +1,65 @@
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import { supabase } from '../../lib/supabase';
+import { View, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 function HomeScreen() {
-  const handleLogout = async () => {
-    try {
-      Alert.alert(
-        '确认退出',
-        '您确定要退出登录吗？',
-        [
-          {
-            text: '取消',
-            style: 'cancel',
-          },
-          {
-            text: '退出',
-            style: 'destructive',
-            onPress: async () => {
-              const { error } = await supabase.auth.signOut();
-              if (error) {
-                Alert.alert('错误', '退出登录失败: ' + error.message);
-              } else {
-                Alert.alert('成功', '已成功退出登录');
-              }
-            },
-          },
-        ],
-      );
-    } catch (error) {
-      Alert.alert('错误', '退出登录时发生错误');
-    }
-  };
-
   return (
-    <View className="flex-1 items-center justify-center bg-gray-50 px-6">
-      {/* 欢迎标题 */}
-      <View className="items-center mb-8">
-        <Text className="text-3xl font-bold text-gray-800 mb-2">
-          欢迎回来！
-        </Text>
-        <Text className="text-lg text-gray-600 text-center">
-          您已成功登录到应用
+    <View className="flex-1 bg-gray-50">
+      {/* Header */}
+      <View className="bg-blue-500 p-8 rounded-3xl shadow-lg mx-2 mt-4">
+        <Text className="text-3xl font-bold text-white mt-4">Welcome Back!</Text>
+        <Text className="text-lg text-white/80 mt-1">
+          Here's what's happening today.
         </Text>
       </View>
 
-      {/* 主页内容区域 */}
-      <View className="bg-white rounded-2xl p-6 shadow-lg w-full max-w-sm mb-6">
-        <Text className="text-xl font-semibold text-gray-800 text-center mb-4">
-          主页
-        </Text>
-        <Text className="text-gray-600 text-center leading-6">
-          这里是您的主页内容，您可以在这里查看和管理您的信息。
-        </Text>
-      </View>
+      {/* Features Grid */}
+      <View className="p-6">
+        <Text className="text-xl font-bold text-gray-700 mb-4">Quick Actions</Text>
+        <View className="flex-row flex-wrap justify-between">
+          {/* Feature Card 1 */}
+          <View className="w-[48%] bg-white rounded-2xl p-4 shadow-sm mb-4 items-center">
+            <Icon name="person-circle-outline" size={40} color="#3b82f6" />
+            <Text className="text-lg font-semibold text-gray-800 mt-2">
+              Profile
+            </Text>
+            <Text className="text-sm text-gray-500 text-center">
+              View your profile
+            </Text>
+          </View>
 
-      {/* 退出登录按钮 */}
-      <TouchableOpacity
-        onPress={handleLogout}
-        className="bg-red-500 hover:bg-red-600 active:bg-red-700 px-8 py-4 rounded-xl shadow-md w-full max-w-sm"
-        activeOpacity={0.8}
-      >
-        <Text className="text-white text-lg font-semibold text-center">
-          退出登录
-        </Text>
-      </TouchableOpacity>
+          {/* Feature Card 2 */}
+          <View className="w-[48%] bg-white rounded-2xl p-4 shadow-sm mb-4 items-center">
+            <Icon name="stats-chart-outline" size={40} color="#10b981" />
+            <Text className="text-lg font-semibold text-gray-800 mt-2">
+              Analytics
+            </Text>
+            <Text className="text-sm text-gray-500 text-center">
+              Check your stats
+            </Text>
+          </View>
 
-      {/* 底部装饰 */}
-      <View className="mt-8 opacity-60">
-        <Text className="text-gray-400 text-sm text-center">
-          点击退出登录按钮安全退出应用
-        </Text>
+          {/* Feature Card 3 */}
+          <View className="w-[48%] bg-white rounded-2xl p-4 shadow-sm items-center">
+            <Icon name="settings-outline" size={40} color="#f97316" />
+            <Text className="text-lg font-semibold text-gray-800 mt-2">
+              Settings
+            </Text>
+            <Text className="text-sm text-gray-500 text-center">
+              App settings
+            </Text>
+          </View>
+
+          {/* Feature Card 4 */}
+          <View className="w-[48%] bg-white rounded-2xl p-4 shadow-sm items-center">
+            <Icon name="notifications-outline" size={40} color="#ef4444" />
+            <Text className="text-lg font-semibold text-gray-800 mt-2">
+              Updates
+            </Text>
+            <Text className="text-sm text-gray-500 text-center">
+              See what's new
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   );
