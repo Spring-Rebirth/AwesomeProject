@@ -20,6 +20,9 @@ export default function App() {
       RootBottomTabs: {
         if: useIsSignedIn,
         screen: RootBottomTabs,
+        options: {
+          headerShown: false,
+        },
       },
       Auth: {
         if: useIsSignedOut,
