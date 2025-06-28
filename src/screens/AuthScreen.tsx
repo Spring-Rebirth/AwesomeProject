@@ -2,12 +2,22 @@ import React, { useState } from 'react'
 import { Alert, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import { supabase } from '../lib/supabase'
 import Icon from '@react-native-vector-icons/fontawesome6';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useAuthState } from '../hooks/auth';
+import SplashScreen from './SplashScreen';
 
+
+type NavigationParamsList = {
+    RootBottomTabs: undefined,
+    Auth: undefined;
+}
 
 export default function AuthScreen() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
+    const { loading, isSignedIn } = useAuthState();
+    const navigation = useNavigation<NavigationProp<NavigationParamsList>>();
+
 
     // 验证邮箱格式
     const validateEmail = (email: string) => {
@@ -30,14 +40,12 @@ export default function AuthScreen() {
             return;
         }
 
-        setLoading(true)
         const { error } = await supabase.auth.signInWithPassword({
             email: email,
             password: password,
         })
 
         if (error) Alert.alert('登录失败', error.message)
-        setLoading(false)
     }
 
     async function signUpWithEmail() {
@@ -59,7 +67,6 @@ export default function AuthScreen() {
             return;
         }
 
-        setLoading(true)
         const {
             data: { session },
             error,
@@ -70,7 +77,20 @@ export default function AuthScreen() {
 
         if (error) Alert.alert('注册失败', error.message)
         if (!session) Alert.alert('验证邮件已发送', '请检查您的邮箱进行邮件验证！')
-        setLoading(false)
+    }
+
+    React.useEffect(() => {
+        if (isSignedIn) {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'RootBottomTabs' }],
+            })
+        }
+    }, [isSignedIn, navigation]);
+
+    // 如果还在加载中，可以显示一个加载屏幕
+    if (loading) {
+        return <SplashScreen />;
     }
 
     return (
