@@ -164,29 +164,20 @@ export default function AuthScreen() {
                                 {loading ? '登录中...' : '登录'}
                             </Text>
                         </TouchableOpacity>
-
-                        {/* Divider */}
-                        <View className="flex-row items-center my-4">
-                            <View className="flex-1 h-px bg-gray-200" />
-                            <Text className="mx-4 text-gray-500 text-sm">或者</Text>
-                            <View className="flex-1 h-px bg-gray-200" />
-                        </View>
-
-                        {/* Sign Up Button */}
-                        <TouchableOpacity
-                            className={`bg-white border-2 border-blue-500 rounded-xl py-4 shadow-sm ${loading ? 'opacity-50' : 'active:bg-blue-50'}`}
-                            disabled={loading}
-                            onPress={signUpWithEmail}
-                            activeOpacity={0.8}
-                        >
-                            <Text className="text-blue-500 text-lg font-semibold text-center">
-                                {loading ? '注册中...' : '创建新账户'}
-                            </Text>
-                        </TouchableOpacity>
                     </View>
 
                     {/* Footer */}
                     <View className="items-center px-4">
+                        <View className='flex-row mb-2'>
+                            <Text className="text-gray-500 text-sm text-center leading-5">
+                                还未注册 ？
+                            </Text>
+                            <TouchableOpacity>
+                                <Text className="text-blue-500 underline ml-2">
+                                    点此注册
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
                         <Text className="text-gray-500 text-sm text-center leading-5">
                             点击登录或注册即表示您同意我们的{'\n'}
                             <Text className="text-blue-500 underline">服务条款</Text>
