@@ -20,7 +20,13 @@ const ProfileTabIcon = (props: { focused: boolean, color: string, size: number }
 
 function RootBottomTabs() {
     return (
-        <Tab.Navigator tabBar={TabBar}>
+        <Tab.Navigator
+            tabBar={TabBar}
+            screenOptions={{
+                tabBarInactiveTintColor: 'gray',
+                tabBarActiveTintColor: 'orange',
+            }}
+        >
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}
