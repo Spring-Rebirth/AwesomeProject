@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator, BottomTabBar, type BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/root-bottom-tabs/HomeScreen';
-import ProfileScreen from '../screens/root-bottom-tabs/ProfileScreen';
+import ProfileScreen from '@/screens/root-bottom-tabs/ProfileScreen';
 import Icon from '@react-native-vector-icons/fontawesome6';
 
 const Tab = createBottomTabNavigator();
