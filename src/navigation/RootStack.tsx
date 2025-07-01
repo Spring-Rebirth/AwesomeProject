@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AuthScreen from '../screens/AuthScreen';
-import RootBottomTabs from '../navigation/RootBottomTabs';
+import DrawerStack from '../navigation/DrawerStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,8 +12,21 @@ function RootStack() {
                 headerShown: false,
             }}
         >
-            <Stack.Screen name='Auth' component={AuthScreen} />
-            <Stack.Screen name='RootBottomTabs' component={RootBottomTabs} />
+            <Stack.Screen
+                name='Auth'
+                component={AuthScreen}
+                options={{
+                    animation: 'fade',
+                    presentation: 'transparentModal',
+                }}
+            />
+            <Stack.Screen
+                name='DrawerStack'
+                component={DrawerStack}
+                options={{
+                    animation: 'fade',
+                }}
+            />
         </Stack.Navigator>
     );
 }

@@ -5,11 +5,11 @@ import Icon from '@react-native-vector-icons/fontawesome6';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useAuthState } from '../hooks/auth';
 import SplashScreen from './SplashScreen';
-
+import Animated from 'react-native-reanimated';
 
 type NavigationParamsList = {
-    RootBottomTabs: undefined,
     Auth: undefined;
+    DrawerStack: undefined;
 }
 
 export default function AuthScreen() {
@@ -83,7 +83,7 @@ export default function AuthScreen() {
         if (isSignedIn) {
             navigation.reset({
                 index: 0,
-                routes: [{ name: 'RootBottomTabs' }],
+                routes: [{ name: 'DrawerStack' }],
             })
         }
     }, [isSignedIn, navigation]);
@@ -106,9 +106,12 @@ export default function AuthScreen() {
                 <View className="flex-1 justify-center px-6 py-12">
                     {/* Header Section */}
                     <View className="items-center mb-8">
-                        <View className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-6 shadow-lg">
+                        <Animated.View
+                            className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-6 shadow-lg"
+                            sharedTransitionTag="user-avatar"
+                        >
                             <Icon name='user' size={40} color="white" />
-                        </View>
+                        </Animated.View>
                         <Text className="text-3xl font-bold text-gray-800 mb-2">
                             欢迎使用
                         </Text>
@@ -172,7 +175,7 @@ export default function AuthScreen() {
                             <Text className="text-gray-500 text-sm text-center leading-5">
                                 还未注册 ？
                             </Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={signUpWithEmail}>
                                 <Text className="text-blue-500 underline ml-2">
                                     点此注册
                                 </Text>

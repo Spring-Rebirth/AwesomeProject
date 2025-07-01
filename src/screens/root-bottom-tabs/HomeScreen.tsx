@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Animated from 'react-native-reanimated';
 
 function HomeScreen() {
   return (
